@@ -1,0 +1,22 @@
+// WE FOUND HALO 2 BABY 
+frames 100
+basename halo2
+push
+    move 15 350 0
+    rotate x 30
+    rotate y 30 
+    push
+        sphere 0 0 0 200
+        push
+            rotate z 90 
+            rotate x 90 k0
+            rotate y -30
+            move 200 0 300
+            push
+                rotate x -40 k0
+                rotate y -40 k0
+                rotate z 60 k0
+                push
+                    torus 0 0 0 10 100
+
+vary k0 0 99 0 1
