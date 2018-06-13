@@ -101,12 +101,12 @@ func ParseFile(file string, params map[string]int) error {
                 (&edge).Transform(*stack.GetWorld())
                 DrawEdgeMatrix(edge,params)
             }
-	case "mesh":
-	     args := GetNextArgs(scanner)
-	     if (len(args) <2) {
-	     	fmt.Errorf("Incorrect number of args\n")
-		}else {
-		}
+        case "mesh":
+            args := GetNextArgs(scanner)
+            if (len(args) <2) {
+                fmt.Errorf("Incorrect number of args\n")
+            } else {
+            }
         case "sphere":
             poly := ZeroMatrix(4,0)
             args := FloatArgs(GetNextArgs(scanner))
@@ -188,36 +188,35 @@ func FloatArgs(args []string) []float64 {
 }
 
 func ObjReader(file string) Matrix* {
-     final := ZeroMatrix(4,0)
-     vert := ZeroMatrix(4,0)
-     f,err := os.OpenFile(file, os.O_RDONLY, 0644)
-     if (err != nil) {
-     	return 0
-	}
-     scanner := bufio.NewScanner(f)
-     for scanner.Scan() {
-	 c := strings.TrimSpace(scanner.Text())
-	 arr := Split(c, " ")
-	 if (arr[0] == "v"){
-	    vert.AddPoint(arr[1], arr[2], arr[3]) 
-	    }	    
-	if(arr[0] == "f"){
-	  if(len(arr) == 4){
-	    finalmatrix.AddTriangle(vert.get(0,arr[1]),vert.get(1,arr[1]),vert.get(2,arr[1]),
-	    vert.get(0,arr[2]),vert.get(1,arr[2]),vert.get(2,arr[2]),
-	    vert.get(0,arr[3]),vert.get(1,arr[3]),vert.get(2,arr[3]))
-	  }
-	 else{
-	    finalmatrix.AddTriangle(vert.get(0,arr[1]),vert.get(1,arr[1]),vert.get(2,arr[1]),
-	    vert.get(0,arr[2]),vert.get(1,arr[2]),vert.get(2,arr[2]),
-	    vert.get(0,arr[3]),vert.get(1,arr[3]),vert.get(2,arr[3]))
-	    
-	    finalmatrix.AddTriangle(vert.get(0,arr[1]),vert.get(1,arr[1]),vert.get(2,arr[1]),
-	    vert.get(0,arr[3]),vert.get(1,arr[3]),vert.get(2,arr[3]),
-	    vert.get(0,arr[4]),vert.get(1,arr[4]),vert.get(2,arr[4]))
-	    		  }}		     		  
-}
-	return finalmatrix
-     	 }
-     
+    final := ZeroMatrix(4,0)
+    vert := ZeroMatrix(4,0)
+    f,err := os.OpenFile(file, os.O_RDONLY, 0644)
+    if (err != nil) {
+        return 0
+    }
+    scanner := bufio.NewScanner(f)
+    for scanner.Scan() {
+        c := strings.TrimSpace(scanner.Text())
+        arr := Split(c, " ")
+        if (arr[0] == "v"){
+            vert.AddPoint(arr[1], arr[2], arr[3])
+        }
+        if(arr[0] == "f"){
+            if(len(arr) == 4){
+                finalmatrix.AddTriangle(vert.get(0,arr[1]),vert.get(1,arr[1]),vert.get(2,arr[1]),
+                vert.get(0,arr[2]),vert.get(1,arr[2]),vert.get(2,arr[2]),
+                vert.get(0,arr[3]),vert.get(1,arr[3]),vert.get(2,arr[3]))
+            }
+            else{
+                finalmatrix.AddTriangle(vert.get(0,arr[1]),vert.get(1,arr[1]),vert.get(2,arr[1]),
+                vert.get(0,arr[2]),vert.get(1,arr[2]),vert.get(2,arr[2]),
+                vert.get(0,arr[3]),vert.get(1,arr[3]),vert.get(2,arr[3]))
+
+                finalmatrix.AddTriangle(vert.get(0,arr[1]),vert.get(1,arr[1]),vert.get(2,arr[1]),
+                vert.get(0,arr[3]),vert.get(1,arr[3]),vert.get(2,arr[3]),
+                vert.get(0,arr[4]),vert.get(1,arr[4]),vert.get(2,arr[4]))
+            }
+        }
+    }
+    return finalmatrix
 }
