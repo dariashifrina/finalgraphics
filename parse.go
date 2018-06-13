@@ -187,36 +187,48 @@ func FloatArgs(args []string) []float64 {
     return floats
 }
 
-func ObjReader(file string) Matrix* {
+func IntArgs(args []string) []int {
+    ints := make([]int, len(args))
+    for i := range args {
+        num, _ := strconv.ParseInt(args[i],10,32)
+        ints[i] = int(num)
+    }
+    return ints
+}
+
+func ObjReader(file string) *Matrix {
     final := ZeroMatrix(4,0)
     vert := ZeroMatrix(4,0)
     f,err := os.OpenFile(file, os.O_RDONLY, 0644)
     if (err != nil) {
-        return 0
+        return nil
     }
     scanner := bufio.NewScanner(f)
     for scanner.Scan() {
         c := strings.TrimSpace(scanner.Text())
-        arr := Split(c, " ")
+        arr := strings.Split(c, " ")
         if (arr[0] == "v"){
-            vert.AddPoint(arr[1], arr[2], arr[3])
+            args := FloatArgs(arr[1:])
+            vert.AddPoint(args[0], args[1], args[2])
         }
         if(arr[0] == "f"){
-            if(len(arr) == 4){
-                finalmatrix.AddTriangle(vert.get(0,arr[1]),vert.get(1,arr[1]),vert.get(2,arr[1]),
-                vert.get(0,arr[2]),vert.get(1,arr[2]),vert.get(2,arr[2]),
-                vert.get(0,arr[3]),vert.get(1,arr[3]),vert.get(2,arr[3]))
-            }
-            else{
-                finalmatrix.AddTriangle(vert.get(0,arr[1]),vert.get(1,arr[1]),vert.get(2,arr[1]),
-                vert.get(0,arr[2]),vert.get(1,arr[2]),vert.get(2,arr[2]),
-                vert.get(0,arr[3]),vert.get(1,arr[3]),vert.get(2,arr[3]))
-
-                finalmatrix.AddTriangle(vert.get(0,arr[1]),vert.get(1,arr[1]),vert.get(2,arr[1]),
-                vert.get(0,arr[3]),vert.get(1,arr[3]),vert.get(2,arr[3]),
-                vert.get(0,arr[4]),vert.get(1,arr[4]),vert.get(2,arr[4]))
+            args := IntArgs(arr[1:])
+            if(len(args) == 3){
+                final.AddTriangle(
+                    vert.get(0,args[0]),vert.get(1,args[0]),vert.get(2,args[0]),
+                    vert.get(0,args[1]),vert.get(1,args[1]),vert.get(2,args[1]),
+                    vert.get(0,args[2]),vert.get(1,args[2]),vert.get(2,args[2]))
+            } else if (len(args) == 4) {
+                final.AddTriangle(
+                    vert.get(0,args[0]),vert.get(1,args[0]),vert.get(2,args[0]),
+                    vert.get(0,args[1]),vert.get(1,args[1]),vert.get(2,args[1]),
+                    vert.get(0,args[2]),vert.get(1,args[2]),vert.get(2,args[2]))
+                final.AddTriangle(
+                    vert.get(0,args[0]),vert.get(1,args[0]),vert.get(2,args[0]),
+                    vert.get(0,args[2]),vert.get(1,args[2]),vert.get(2,args[2]),
+                    vert.get(0,args[3]),vert.get(1,args[3]),vert.get(2,args[3]))
             }
         }
     }
-    return finalmatrix
+    return &final
 }
