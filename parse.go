@@ -140,6 +140,13 @@ func ParseFile(file string, params map[string]int) error {
                 poly.Transform(*stack.GetWorld())
                 DrawPolyMatrix(poly,params,true,view)
             }
+	case "light":
+	     args := FloatArgs(GetNextArgs(scanner))
+	     if(len(args) < 6){
+	        fmt.Errorf("Incorrect number of args\n")
+	    } else {
+	      	AddLight(args[0], args[1], args[2], args[3], args[4], args[5])
+		}
         case "rotate":
             trans := IdentityMat(4)
             args := GetNextArgs(scanner)

@@ -14,6 +14,12 @@ func DrawLineCart(x1 int, y1 int,z1 float64, x2 int, y2 int, z2 float64, params 
 	DrawLine(250+x1,250-y1, z1,250+x2, 250-y2, z2, params, PlotGrid)
 }
 
+func AddLight(red, green, blue, x, y, z float64){
+     c := Color{int(red), int(green), int(blue)}
+     arr := []float64{x,y,z}
+     LIGHTS = append(LIGHTS, (Light{c,arr}))
+     }
+
 func DrawEdgeMatrix(matrix Matrix, params map[string]int) {
     var wg sync.WaitGroup
     cols := matrix.N
