@@ -106,6 +106,7 @@ func ParseFile(file string, params map[string]int) error {
             if (len(args) <1) {
                 fmt.Errorf("Incorrect number of args\n")
             } else {
+	       fmt.Println(args[0])
 	       poly := ObjReader(args[0])
                poly.Transform(*stack.GetWorld())
                DrawPolyMatrix(*poly,params,true,view)
@@ -239,6 +240,7 @@ func ObjReader(file string) *Matrix {
                     vert.get(0,args[3]),vert.get(1,args[3]),vert.get(2,args[3]))
             }
         }
-    }
+	}
+    final.PrintMatrix()
     return &final
 }

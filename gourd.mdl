@@ -1,4 +1,5 @@
 push
+scale 100 100 100
 mesh :gourd.obj
 display
 save gourd.png
