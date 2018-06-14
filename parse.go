@@ -209,7 +209,8 @@ func IntArgs(args []string) []int {
 
 func ObjReader(file string) *Matrix {
     final := ZeroMatrix(4,0)
-    vert := ZeroMatrix(4,0)
+    //added random 0,0,0,0 in front because 1-indexing
+    vert := ZeroMatrix(4,1)
     f,err := os.OpenFile(file, os.O_RDONLY, 0644)
     if (err != nil) {
         return nil
