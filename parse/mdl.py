@@ -32,6 +32,7 @@ tokens = (
     "SAVE",
     "GENERATE_RAYFILES",
     "SHADING",
+    "POLYLIST",
     "SHADING_TYPE",
     "SET_KNOBS",
     "FOCAL",
@@ -112,6 +113,9 @@ def t_CO(t):
 
 def t_error(t):
     print "TOKEN ERROR: " + str(t)
+def t_POLYLIST(t):
+    r"""^(\s*-?\d+(\.\d+)?)(\s*,\s*-?\d+(\.\d+)?)*$"""
+    return t
 
 lex.lex()
 
@@ -281,7 +285,8 @@ def p_command_basename(p):
     commands.append(cmd)
 
 def p_command_vary(p):
-    """command : VARY SYMBOL NUMBER NUMBER NUMBER NUMBER"""
+    """command : VARY SYMBOL NUMBER NUMBER NUMBER NUMBER
+    | VARY SYMBOL NUMBER NUMBER NUMBER NUMBER POLYLIST"""
     cmd = {'op' : p[1], 'args' : p[3:], 'knob' : p[2]}
     symbols[p[2]] = ['knob', 0]
     commands.append(cmd)
