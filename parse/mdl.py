@@ -310,9 +310,10 @@ def p_command_constants(p):
     commands.append(cmd)
 
 def p_command_light(p):
-    "command : LIGHT SYMBOL NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER"
+    """command : LIGHT SYMBOL NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER
+    | LIGHT NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER"""
     symbols[p[2]] = ['light', {'location' : p[3:6], 'color' : p[6:]}]
-    cmd = {'op':p[1], 'args' : None, 'light' : p[2] }
+    cmd = {'op':p[1], 'args' : p[-6:], 'light' : p[2] }
     commands.append(cmd)
 
 def p_command_shading(p):
