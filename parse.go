@@ -101,13 +101,13 @@ func ParseFile(file string, params map[string]int) error {
                 (&edge).Transform(*stack.GetWorld())
                 DrawEdgeMatrix(edge,params)
             }
-	case "ambient":
-	     args := FloatArgs(GetNextArgs(scanner))
-	     if (len(args) < 3){
-	     	fmt.Errorf("Incorrect # of args!\n")
-		} else {
-		ChangeAmbience(args[0], args[1], args[2])
-		}
+        case "ambient":
+            args := FloatArgs(GetNextArgs(scanner))
+            if (len(args) < 3){
+                fmt.Errorf("Incorrect # of args!\n")
+            } else {
+                ChangeAmbience(args[0], args[1], args[2])
+            }
         case "mesh":
             args := GetNextArgs(scanner)
             if (len(args) <1) {
@@ -177,9 +177,14 @@ func ParseFile(file string, params map[string]int) error {
         case "":
 
         case "clear":
-            stack = MakeWorldStack()
-            screen = MakeGrid(Width, Height)
-            FillGrid(255,255,255)
+            args := FloatArgs(GetNextArgs(scanner))
+            if (len(args) < 3) {
+                fmt.Errorf("INCORRECT number of args\n")
+            } else {
+                stack = MakeWorldStack()
+                screen = MakeGrid(Width, Height)
+                FillGrid(int(args[0]),int(args[1]),int(args[2]))
+            }
         default:
             if strings.Contains(c, "ERROR") {
                 fmt.Println(c)

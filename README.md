@@ -41,3 +41,7 @@ Go's syntactic sugar and use of slices (similar to Python lists) also made it re
 Obviously, the engine isn't fast. That wasn't the point of this course. However, using Go has allowed us to easily make our engine much faster while gaining first hand experience with useful tools for concurrency, such as mutex locks and semaphores. It's also allowed us to see an example of how something like this might scale with dedicated GPU's. 
 
 Go is also a language with a growing community and is one that is definitely worth learning (Dasha learned the language while doing this project, and Gilvir learned it at a slower but still reasonable pace when initially starting this engine at the beginning of the semester). It's a ease of use and documentation, and inclusion of modern features, makes it a very powerful tool for all developers.
+
+## Smoll features
+
+* `background r g b` is an addition to our modified MDL spec that allows you to set the background color for your image to be whatever color you desire.

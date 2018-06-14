@@ -38,7 +38,8 @@ tokens = (
     "DISPLAY",
     "SCREEN",
     "WEB",
-    "CO"
+    "CO",
+    "BACKGROUND"
 )
 
 reserved = {
@@ -79,7 +80,8 @@ reserved = {
     "setknobs" : "SET_KNOBS",
     "focal" : "FOCAL",
     "display" : "DISPLAY",
-    "web" : "WEB"
+    "web" : "WEB",
+    "background" : "BACKGROUND"
 }
 
 t_ignore = " \t"
@@ -315,6 +317,9 @@ def p_command_light(p):
     symbols[p[2]] = ['light', {'location' : p[3:6], 'color' : p[6:]}]
     cmd = {'op':p[1], 'args' : p[-6:], 'light' : p[2] }
     commands.append(cmd)
+def p_command_background(p):
+    "command : BACKGROUND NUMBER NUMBER NUMBER"
+    symbols['background'] = p[2:]
 
 def p_command_shading(p):
     "command : SHADING SHADING_TYPE"

@@ -51,6 +51,9 @@ def run(filename):
 
     if p:
         (commands, symbols) = p
+        if 'background' not in symbols.keys():
+            symbols['background'] = [0, 0, 0]
+        color_bg = symbols['background']
         (frames, basename) = first_pass(commands)
         knobs = second_pass(commands, frames, linear_func)
         print commands
@@ -63,6 +66,7 @@ def run(filename):
         ctr = 0
         for frame in knobs:
             print "clear"
+            print "%d %d %d" % (color_bg[0], color_bg[1], color_bg[2])
             for command in commands:
                 if command["op"] in knobbed_cmds:
                     print (command["op"])
