@@ -7,7 +7,7 @@ import (
     "strings"
     "strconv"
 )
-const Step = 0.005
+const Step = 0.01
 func ParseFile(file string, params map[string]int) error {
     view := []float64{0,0,1,0}
     stack := MakeWorldStack()
@@ -113,7 +113,6 @@ func ParseFile(file string, params map[string]int) error {
             if (len(args) <1) {
                 fmt.Errorf("Incorrect number of args\n")
             } else {
-	       fmt.Println(args[0])
 	       poly := ObjReader(args[0])
                poly.Transform(*stack.GetWorld())
                DrawPolyMatrix(*poly,params,true,view)
@@ -254,6 +253,5 @@ func ObjReader(file string) *Matrix {
             }
         }
 	}
-    final.PrintMatrix()
     return &final
 }

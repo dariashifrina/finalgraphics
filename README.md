@@ -10,8 +10,12 @@ Add additional light sources, in accordance to MDL spec;
 ```
 light r g b x y z
 ```
-``
 
+Alternatively, you can replace r,g, or b with a knob value, for example
+
+```
+light k0 g b x y z
+```
 You can also change the ambient light source, again in accordance to the MDL spec.
 
 ```
@@ -19,8 +23,11 @@ ambient r g b
 ```
 
 ## Meshes
-In progress:
 Functionality, can interpret "v" and "f" commands from Wavefront .obj format properly (ie the pear and teapot), however cannot do texture mappings or interpret vertex normals.
+```mesh :meshname.obj```
+
+it's treated as a regular object, rotations etc still apply traditionally.
+
 
 One problem we had was that OBJ files are 1-indexed and our function assumed 0-indexing. Please don't look at how we fixed it. It's kind of disgusting.
 ## Written (Mostly) in Go!

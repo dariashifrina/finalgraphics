@@ -1,6 +1,5 @@
 package main
 import (
-    "fmt"
     "sync"
 )
 //cart from -250 to 250ish
@@ -20,14 +19,12 @@ func DrawLineCart(x1 int, y1 int,z1 float64, x2 int, y2 int, z2 float64, params 
 func ChangeAmbience(red, green, blue float64){
      c := Color{int(red), int(green), int(blue)}
      AMBIENT = c
-     fmt.Println(AMBIENT)
 }
 
 func AddLight(red, green, blue, x, y, z float64){
      c := Color{int(red), int(green), int(blue)}
      arr := []float64{x,y,z}
      LIGHTS = append(LIGHTS, (Light{c,arr}))
-     fmt.Println(LIGHTS)
      }
 
 func DrawEdgeMatrix(matrix Matrix, params map[string]int) {
