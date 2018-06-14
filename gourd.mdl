@@ -1,4 +1,4 @@
 push
-mesh gourd.obj
+mesh :gourd.obj
 display
 save gourd.png
