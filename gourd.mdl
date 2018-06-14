@@ -1,0 +1,4 @@
+push
+mesh gourd.obj
+display
+save gourd.png

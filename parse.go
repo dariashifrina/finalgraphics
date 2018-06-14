@@ -103,9 +103,12 @@ func ParseFile(file string, params map[string]int) error {
             }
         case "mesh":
             args := GetNextArgs(scanner)
-            if (len(args) <2) {
+            if (len(args) <1) {
                 fmt.Errorf("Incorrect number of args\n")
             } else {
+	       poly := ObjReader(args[0])
+               poly.Transform(*stack.GetWorld())
+               DrawPolyMatrix(*poly,params,true,view)
             }
         case "sphere":
             poly := ZeroMatrix(4,0)
