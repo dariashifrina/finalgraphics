@@ -11,8 +11,16 @@ var KA = []float64{0.1,0.1,0.1}
 var KD = []float64{0.5,0.5,0.5}
 var KS = []float64{0.5,0.5,0.5}
 var LIGHTS = []Light{Light{Color{0,255,255},[]float64{0.5,0.75,1}}}
+
+
 func DrawLineCart(x1 int, y1 int,z1 float64, x2 int, y2 int, z2 float64, params map[string]int) {
 	DrawLine(250+x1,250-y1, z1,250+x2, 250-y2, z2, params, PlotGrid)
+}
+
+func ChangeAmbience(red, green, blue float64){
+     c := Color{int(red), int(green), int(blue)}
+     AMBIENT = c
+     fmt.Println(AMBIENT)
 }
 
 func AddLight(red, green, blue, x, y, z float64){
